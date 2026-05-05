@@ -22,6 +22,7 @@
   <ion-list>
     <ion-item *ngFor="let movie of movies" (click)="goToMovieDetails(movie)" button>
       <ion-thumbnail slot="start">
+        <img [src]="getPoster(movie.poster_path)" alt="poster" />
       </ion-thumbnail>
       <ion-label class="ion-text-wrap">{{ movie.overview }}</ion-label>
     </ion-item>

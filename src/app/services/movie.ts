@@ -30,4 +30,11 @@ getPersonMovieCredits(personId: number): Observable<any> {
     return this.http.get('https://api.themoviedb.org/3/person/' + personId + '/movie_credits?api_key=' + this.api);
   } 
 
+  getPosterLink(path: any) {
+  if (path) {
+    return 'https://image.tmdb.org/t/p/w500' + path;
+  } else {
+    return '';
+  }
+}
 }

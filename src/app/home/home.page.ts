@@ -8,7 +8,6 @@ import { NgFor, NgIf } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { heart, home } from 'ionicons/icons';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -47,6 +46,9 @@ constructor(private movie: Movie, private router: Router) {
     });
   }
 
+   getPoster(path: string): string {
+    return this.movie.getPosterLink(path);
+  };
   
   goToMovieDetails(movie: any) {
     this.router.navigate(['/movie-details'], { state: { movie } });
@@ -55,4 +57,5 @@ constructor(private movie: Movie, private router: Router) {
   goToFavourites() {
     this.router.navigate(['/favourites']);
   }
+
 }
