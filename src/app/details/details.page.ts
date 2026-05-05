@@ -6,6 +6,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 @Component({
   selector: 'app-details',
   templateUrl: './details.page.html',
+  styleUrls: ['./details.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })

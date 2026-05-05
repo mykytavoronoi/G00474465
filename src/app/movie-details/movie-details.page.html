@@ -1,13 +1,52 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>movie-details</ion-title>
+    <ion-title>{{ movie?.title }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()">
+        <ion-icon name="home" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToFavourites()">
+        <ion-icon name="heart" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">movie-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+<p *ngIf="movie">{{ movie.overview }}</p>
+
+  <ion-button expand="block" [color]="isFavourite ? 'success' : 'primary'" (click)="toggleFavourite()">
+    <span *ngIf="isFavourite">REMOVE FROM FAVOURITES</span>
+    <span *ngIf="!isFavourite">ADD TO FAVOURITES</span>
+  </ion-button>
+
+  <h3>Cast</h3>
+  <ion-list>
+    <ion-item *ngFor="let member of cast" (click)="goToPerson(member, 'cast')" button>
+      <ion-thumbnail slot="start">
+        <img *ngIf="member.profile_path" [src]="getProfile(member.profile_path)" />
+        <span *ngIf="!member.profile_path">No image</span>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ member.character }}</h2>
+        <p>{{ member.name }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <h3>Crew</h3>
+  <ion-list>
+    <ion-item *ngFor="let member of crew" (click)="goToPerson(member, 'crew')" button>
+      <ion-thumbnail slot="start">
+        <img *ngIf="member.profile_path" [src]="getProfile(member.profile_path)" />
+        <span *ngIf="!member.profile_path">No image</span>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ member.job }}</h2>
+        <p>{{ member.name }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

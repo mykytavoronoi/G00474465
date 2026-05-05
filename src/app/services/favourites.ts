@@ -10,35 +10,34 @@ export class Favourites {
   getFavourites(): any[] {
     const data = localStorage.getItem(this.key);
   if (data) {
-    return JSON.parse(data);
-  } else {
-    return [];
+    var parsed = JSON.parse(data);
+    var clean = [];
+    for (var i = 0; i < parsed.length; i++) {
+      if (parsed[i] != null) {
+        clean.push(parsed[i]);
   }
   }
-
- isFavourite(movieId:any) {
-  var favs = this.getFavourites();
-  for (var i = 0; i < favs.length; i++) {
-    if (favs[i].id === movieId) {
-      return true;
-    }
+  return clean;
+} else {
+  return [];
   }
-  return false;
 }
 
+isFavourite(movieId: any): boolean {
+  const favs = this.getFavourites();
+  return favs.some(fav => fav.id === movieId);
+}
+  
+
 addFavourite(movie:any) {
+if (!movie || !movie.id) {
+  return;
+}
+if (!this.isFavourite(movie.id)) {
   var favs = this.getFavourites();
-  var alreadyExists = false;
-  for (var i = 0; i < favs.length; i++) {
-    if (favs[i].id === movie.id) {
-      alreadyExists = true;
-      break;
-    }
-  }
-  if (!alreadyExists) {
-    favs.push(movie);
-    localStorage.setItem(this.key, JSON.stringify(favs));
-  }
+  favs.push(movie);
+  localStorage.setItem(this.key, JSON.stringify(favs));
+}
 }
 
 removeFavourite(movieId:any) {
