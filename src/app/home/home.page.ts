@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonLabel, IonItem, IonInput, IonButton, IonThumbnail, IonIcon, IonButtons} from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { Movie } from '../services/movie';
-import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { heart, home } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  imports: [IonHeader, NgFor, NgIf, FormsModule, IonToolbar, IonTitle, IonContent, IonList, IonLabel, IonItem, IonInput, IonButton, IonThumbnail, JsonPipe, IonIcon, IonButtons],
+  imports: [IonHeader, NgFor, FormsModule, IonToolbar, IonTitle, IonContent, IonList, IonLabel, IonItem, IonInput, IonButton, IonThumbnail, IonIcon, IonButtons],
 })
 export class HomePage implements OnInit{
 

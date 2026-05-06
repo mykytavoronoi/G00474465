@@ -53,8 +53,8 @@ toggleFavourite() {
     return this.movieService.getPosterLink(path);
   }
 
-  goToPerson(person: any, role: string) {
-    this.router.navigate(['/details'], { state: { person, role } });
+  async goToPerson(person: any, role: string) {
+    await this.router.navigate(['/details'], { state: { person } });
   }
 
   goHome() {
