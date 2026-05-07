@@ -20,34 +20,40 @@ export class DetailsPage {
 constructor(private router: Router, private movieService: Movie) {
   addIcons ({home, heart});
 }
-
+//fires every time the page is navigated to/ shows the person that was selected on the movie details page
 ionViewWillEnter() {
   var actor = this.movieService.selectedPerson;
   console.log('actor:', actor);
+
+  //  reset the data every time the page is entered
   this.actorDetails = null;
   this.credits = [];
 
+  // call the api if an actor was selected
 if (actor) {
+  // fetching details of the person
   this.movieService.getPersonDetails(actor.id).subscribe((data:any) => {
     this.actorDetails = data;
   });
+  // fetching the other movies actor starred in
   this.movieService.getPersonMovieCredits(actor.id).subscribe((data:any) => {
     this.credits = data.cast;
   });
 }
 }
+// Building the path to image URL, from movie.ts
 getProfile(path: string): string {
     return this.movieService.getPosterLink(path);
   }
-
+// Navigation to movie details
   goToMovieDetails(movie: any) {
     this.router.navigate(['/movie-details']);
   }
-
+// Navigation to Home page
   goHome() {
     this.router.navigate(['/home']);
   }
-
+// navigation to favourites page
   goFav() {
     this.router.navigate(['/favourites']);
   }

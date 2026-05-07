@@ -6,7 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Movie {
+  //my api
   private api = '9e8962500d1cfb4ac6d47ec70f4dceba';
+  //stores the currently selected movies and people to navigate between pages
   selectedPerson:any;
   selectedMovie:any;
 
@@ -14,6 +16,7 @@ export class Movie {
   constructor(private http: HttpClient) {
   }
 
+//URL builders
 
 getTrending(): Observable<any> {
     return this.http.get('https://api.themoviedb.org/3/trending/movie/day?api_key=' + this.api);

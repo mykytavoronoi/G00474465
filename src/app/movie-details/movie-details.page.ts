@@ -14,6 +14,7 @@ import { Favourites } from '../services/favourites';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonButtons, IonThumbnail, IonIcon, IonItem, IonList, IonLabel]
 })
 export class MovieDetailsPage implements OnInit {
+  //stores the info, movie,cast,crew in arrays
   movie: any;
   cast: any[] = [];
   crew: any[] = [];
@@ -26,13 +27,14 @@ export class MovieDetailsPage implements OnInit {
     private fav: Favourites
   ) {
     {
+      //movie object passed via router navigation
   const nav = this.router.getCurrentNavigation();
   if (nav && nav.extras && nav.extras.state) {
   this.movie = nav.extras.state['movie'];
 }
 }
   }
-
+//checks if a movie is favourite
   ngOnInit() {
     if (this.movie) {
       this.isFavourite = this.fav.isFavourite(this.movie.id);
@@ -42,6 +44,7 @@ export class MovieDetailsPage implements OnInit {
       });
     }
   }
+  // checks from memory if this is favourite movie or not
 toggleFavourite() {
     if (this.isFavourite) {
       this.fav.removeFavourite(this.movie.id);
@@ -50,20 +53,20 @@ toggleFavourite() {
     }
     this.isFavourite = !this.isFavourite;
   }
-
+// poster url
   getProfile(path: string): string {
     return this.movieService.getPosterLink(path);
   }
-
+//nav to person details
   goToPerson(person: any, role: string) {
     this.movieService.selectedPerson = person;
     this.router.navigate(['/details']);
   }
-
+// nav home
   goHome() {
     this.router.navigate(['/home']);
   }
-
+// nav to favourites
   goToFavourites() {
     this.router.navigate(['/favourites']);
   }

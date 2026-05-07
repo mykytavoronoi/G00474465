@@ -1,6 +1,8 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar>
     <ion-title>{{ actorDetails?.name }}</ion-title>
+  <!-- Home and favourites buttons -->
     <ion-buttons slot="start">
       <ion-button (click)="goHome()">
         <ion-icon name="home" slot="icon-only"></ion-icon>
@@ -16,27 +18,32 @@
 
 
 <ion-content class="ion-padding">
+  <!-- Will display the content only if ActorDetails has been loaded from the API -->
   <div *ngIf="actorDetails">
 
+    <!-- Actor Image/ No Image text if no img available -->
     <img *ngIf="actorDetails.profile_path" 
          [src]="getProfile(actorDetails.profile_path)" 
          style="width: 150px;" />
     <p *ngIf="!actorDetails.profile_path">No image</p>
 
+    <!-- Actor birthday and deathday, only shows the latter if the actor is dead-->
     <p *ngIf="actorDetails.birthday">
       DOB: {{ actorDetails.birthday }}
       <span *ngIf="actorDetails.deathday"> - DOD: {{ actorDetails.deathday }}</span>
     </p>
 
-    
+    <!-- Place of birth -->
     <p *ngIf="actorDetails.place_of_birth"> Place of Birth: {{ actorDetails.place_of_birth }}</p>
 
+    <!-- AKA/ shows only if not empty -->
     <div *ngIf="actorDetails.also_known_as && actorDetails.also_known_as.length > 0">
+      <!-- Loop through each alias -->
       <p *ngFor="let aka of actorDetails.also_known_as"> Also knows as: {{ aka }}</p>
     </div>
-
+    <!-- BIO -->
     <p *ngIf="actorDetails.biography">Biography: {{ actorDetails.biography }}</p>
-
+<!-- List of other movies with the actor -->
     <h3>Other Movies</h3>
   <ion-list>
   <ion-item *ngFor="let movie of credits" (click)="goToMovieDetails(movie)" button>

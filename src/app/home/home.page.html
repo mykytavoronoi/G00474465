@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar>
     <ion-title> G00474465 </ion-title>
@@ -12,18 +13,21 @@
 <ion-content>
   <ion-item>
     <ion-label position="floating">Search</ion-label>
+    <!-- binds to searchQuery -->
     <ion-input [(ngModel)]="searchQuery" placeholder="Movie Name"></ion-input>
   </ion-item>
-
+<!-- search() method is triggered on click-->
   <ion-button expand="full" (click)="search()">SEARCH</ion-button>
-
+<!-- dynamic title. shows trending or search result-->
   <p><strong>{{ listTitle }}</strong></p>
 
   <ion-list>
+    <!-- Loop through movies and make them clickable -->
     <ion-item *ngFor="let movie of movies" (click)="goToMovieDetails(movie)" button>
       <ion-thumbnail slot="start">
         <img [src]="getPoster(movie.poster_path)" style="width:128px;height:128px;" alt="poster" />
       </ion-thumbnail>
+      <!-- movie overview text, wraps if too long -->
       <ion-label class="ion-text-wrap">{{ movie.overview }}</ion-label>
     </ion-item>
   </ion-list>

@@ -1,5 +1,7 @@
+<!--Header-->
 <ion-header>
   <ion-toolbar>
+    <!--dinamic movie title-->
     <ion-title>{{ movie?.title }}</ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="goHome()">
@@ -15,8 +17,10 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-<p *ngIf="movie">{{ movie.overview }}</p>
+  <!-- Shows if movie description has loaded -->
+<p *ngIf="movie">Description: {{ movie.overview }}</p>
 
+<!--dynamic button, changes color and text if already pressed or not-->
   <ion-button expand="block" [color]="isFavourite ? 'success' : 'primary'" (click)="toggleFavourite()">
     <span *ngIf="isFavourite">REMOVE FROM FAVOURITES</span>
     <span *ngIf="!isFavourite">ADD TO FAVOURITES</span>
@@ -24,13 +28,18 @@
 
   <h3>Cast</h3>
   <ion-list>
+    <!-- Loop through cast members, clickable-->
     <ion-item *ngFor="let member of cast" (click)="goToPerson(member, 'cast')" button>
       <ion-thumbnail slot="start">
+        <!-- actors picture, no image if didn`t load -->
         <img *ngIf="member.profile_path" [src]="getProfile(member.profile_path)" />
         <span *ngIf="!member.profile_path">No image</span>
       </ion-thumbnail>
       <ion-label>
+
+        <!-- character name -->
         <h2>{{ member.character }}</h2>
+        <!-- real actor name -->
         <p>{{ member.name }}</p>
       </ion-label>
     </ion-item>
@@ -38,13 +47,16 @@
 
   <h3>Crew</h3>
   <ion-list>
+    <!-- loop through each crew member and make them clickable -->
     <ion-item *ngFor="let member of crew" (click)="goToPerson(member, 'crew')" button>
       <ion-thumbnail slot="start">
         <img *ngIf="member.profile_path" [src]="getProfile(member.profile_path)" />
         <span *ngIf="!member.profile_path">No image</span>
       </ion-thumbnail>
       <ion-label>
+        <!-- job title -->
         <h2>{{ member.job }}</h2>
+        <!-- real name -->
         <p>{{ member.name }}</p>
       </ion-label>
     </ion-item>

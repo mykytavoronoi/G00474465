@@ -1,3 +1,4 @@
+<!--Header-->
 <ion-header>
   <ion-toolbar>
     <ion-title>Favourite Movies</ion-title>
@@ -9,13 +10,16 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
   <ion-list>
+    <!-- loop through each movie in the favourites array -->
     <ion-item *ngFor="let movie of favourites">
       <ion-thumbnail slot="start">
         <img [src]="getPoster(movie.poster_path)" />
       </ion-thumbnail>
       <ion-label>{{ movie.title }}</ion-label>
+      <!-- Details button, nav to movie details -->
       <ion-button slot="end" (click)="goToMovieDetails(movie)">Details</ion-button>
     </ion-item>
   </ion-list>
