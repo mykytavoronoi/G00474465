@@ -7,9 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class Movie {
   private api = '9e8962500d1cfb4ac6d47ec70f4dceba';
+  selectedPerson:any;
+  selectedMovie:any;
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
+
 
 getTrending(): Observable<any> {
     return this.http.get('https://api.themoviedb.org/3/trending/movie/day?api_key=' + this.api);
@@ -23,7 +27,7 @@ getCredits(movieId: number): Observable<any> {
   }
 
 getPersonDetails(personId: number): Observable<any> {
-    return this.http.get ('https://api.themoviedb.org/3/person/' + personId + '?api_key=' + this.api);
+    return this.http.get('https://api.themoviedb.org/3/person/' + personId + '?api_key=' + this.api);
   }
 
 getPersonMovieCredits(personId: number): Observable<any> {
@@ -36,5 +40,6 @@ getPersonMovieCredits(personId: number): Observable<any> {
   } else {
     return '';
   }
+
 }
 }

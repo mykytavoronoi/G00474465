@@ -5,6 +5,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonIcon, IonButto
 import { Movie } from '../services/movie';
 import { Router } from '@angular/router';
 import { Favourites } from '../services/favourites';
+
+
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.page.html',
@@ -53,8 +55,9 @@ toggleFavourite() {
     return this.movieService.getPosterLink(path);
   }
 
-  async goToPerson(person: any, role: string) {
-    await this.router.navigate(['/details'], { state: { person } });
+  goToPerson(person: any, role: string) {
+    this.movieService.selectedPerson = person;
+    this.router.navigate(['/details']);
   }
 
   goHome() {

@@ -1,4 +1,52 @@
 <ion-header>
-    <ion-title>Actor Name</ion-title>
+  <ion-toolbar>
+    <ion-title>{{ actorDetails?.name }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()">
+        <ion-icon name="home" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goFav()">
+        <ion-icon name="heart" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
+
+<ion-content class="ion-padding">
+  <div *ngIf="actorDetails">
+
+    <img *ngIf="actorDetails.profile_path" 
+         [src]="getProfile(actorDetails.profile_path)" 
+         style="width: 150px;" />
+    <p *ngIf="!actorDetails.profile_path">No image</p>
+
+    <p *ngIf="actorDetails.birthday">
+      DOB: {{ actorDetails.birthday }}
+      <span *ngIf="actorDetails.deathday"> - DOD: {{ actorDetails.deathday }}</span>
+    </p>
+
+    
+    <p *ngIf="actorDetails.place_of_birth"> Place of Birth: {{ actorDetails.place_of_birth }}</p>
+
+    <div *ngIf="actorDetails.also_known_as && actorDetails.also_known_as.length > 0">
+      <p *ngFor="let aka of actorDetails.also_known_as"> Also knows as: {{ aka }}</p>
+    </div>
+
+    <p *ngIf="actorDetails.biography">Biography: {{ actorDetails.biography }}</p>
+
+    <h3>Other Movies</h3>
+  <ion-list>
+  <ion-item *ngFor="let movie of credits" (click)="goToMovieDetails(movie)" button>
+    <ion-thumbnail slot="end">
+      <img *ngIf="movie.poster_path" [src]="getProfile(movie.poster_path)" />
+    </ion-thumbnail>
+    <ion-label>{{ movie.title }}</ion-label>
+  </ion-item>
+</ion-list>
+
+
+  </div>
+</ion-content>
